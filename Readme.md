@@ -2,6 +2,6 @@
 
 Основным её результатом является [scala-workflow](https://github.com/aztek/scala-workflow).
 
-Для сборки нужен `pdflatex`, сама сборка делается командой `make`, скомпилированная копия — это [msc.pdf](./raw/master/msc.pdf).
+Для сборки нужен `pdflatex`, сама сборка делается командой `make`, скомпилированная копия — это [msc.pdf](https://github.com/aztek/master-thesis/blob/master/msc.pdf?raw=true).
 
 Для связи: [e-mail](mailto://evgeny.kotelnikov@gmail.com) и [твиттер](http://twitter.com/aztek).
