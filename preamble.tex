@@ -1,0 +1,154 @@
+\documentclass[a4paper,14pt]{extreport}
+
+\usepackage{geometry}
+\geometry{left=3cm}
+\geometry{right=1.5cm}
+\geometry{top=2cm}
+\geometry{bottom=2cm}
+
+\usepackage{amssymb,amsfonts,amsmath,dsfont,cite,enumerate,float,ulem}
+
+\usepackage{amsthm}
+
+% fonts and encoding
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{cmap}
+
+% Babel
+\usepackage[english,russian]{babel}
+
+% hyperref
+\usepackage[pdftex,unicode]{hyperref}
+\hypersetup{pdfborder=false}
+\hypersetup{colorlinks=false}
+
+% graphics captions
+\usepackage{ccaption}
+\captionnamefont{\small}
+\captiontitlefont{\small}
+\captiondelim{. }
+
+% source code
+\usepackage{listings}
+
+% indent first paragraphs
+\parindent=1.25cm
+\usepackage{indentfirst}
+
+\usepackage{stmaryrd}
+
+% haskell code formatting
+\usepackage{haskell}
+
+{
+  \catcode`/=0
+  \catcode`\\=13
+  /gdef/backslashchar{/string\}
+}
+\newcommand{\cmd}[1]{\texttt{\backslashchar#1}}
+
+% patch for haskell package
+\DeclareRobustCommand\ensuremath[1]{\ifmmode#1\else{$#1$}\fi}
+
+% baseline value
+\usepackage[nodisplayskipstretch]{setspace}
+\onehalfspacing
+
+\usepackage{tikz-cd}
+\tikzset{commutative diagrams/row sep/normal=2.5cm}
+\tikzset{commutative diagrams/column sep/normal=2.5cm}
+\tikzset{commutative diagrams/column sep/small=1.0cm}
+
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.5}
+
+% arabic enumerations
+\renewcommand{\theenumi}{\arabic{enumi}.} 
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\theenumii}{\arabic{enumii}}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\theenumiii}{\arabic{enumiii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
+
+% make \am and \emph italic
+\renewcommand{\emph}{\textit}
+\renewcommand{\em}{\itshape}
+
+\let\oldsection\section 
+\renewcommand{\section}{\clearpage\oldsection}
+
+\newenvironment{definition}[1][Определение.]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hfill\scshape\Large\bfseries}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftbeforetoctitleskip}{-2em}
+\renewcommand{\cftaftertoctitleskip}{2pt}
+\cftsetpnumwidth{1em}
+\cftsetindents{chap}{0em}{1.2em}
+\cftsetindents{sec}{1.5em}{1.9em}
+\cftsetindents{subsec}{3em}{2.7em}
+\renewcommand{\cftchappagefont}{\normalsize}
+\renewcommand{\cftchapfont}{\chaptername~}
+\renewcommand{\cftchapaftersnum}{.}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+\renewcommand{\cftparskip}{1pt}
+\renewcommand{\cftdotsep}{1.5}
+\addtocontents{toc}{\protect\renewcommand{\protect\cftchapleader}{\protect\cftdotfill{\cftdotsep}}}
+\setcounter{tocdepth}{2}
+
+\let\footnotesize\small
+
+\renewcommand{\contentsname}{Содержание}
+
+\usepackage{titlesec}
+ 
+\titleformat{\chapter}
+  {\filcenter}
+  {\Large\bfseries\scshape\chaptertitlename~\thechapter.}
+  {0.5em}
+  {\Large\bfseries\scshape}{}
+
+\titleformat{\section}
+  {\filcenter}
+  {\large\bfseries\scshape\thesection.}
+  {0.5em}
+  {\large\bfseries\scshape}{}
+
+\titleformat{\subsection}
+  {\filcenter}
+  {\bfseries\scshape\thesubsection.}
+  {0.5em}
+  {\bfseries\scshape}{}
+
+\titlespacing*{\chapter}{0pt}{-30pt}{14pt}
+\titlespacing*{\section}{0pt}{*4}{*1}
+\titlespacing*{\subsection}{0pt}{*4}{*1}
+
+\makeatletter
+\renewcommand{\@dotsep}{1.5}
+\newcommand{\l@likechapter}[2]{{\vspace{12pt}\@dottedtocline{1}{0pt}{0pt}{#1}{#2}}}
+
+\makeatother
+\newcommand{\likechapter}[1]{
+  \chapter*{#1}
+  \addcontentsline{toc}{likechapter}{#1}
+}
+
+\newcommand{\eng}[1]{англ. ``\begin{otherlanguage}{english}#1\end{otherlanguage}''}
+
+% a hack for titling appendicies nicely
+% without usage of `appendix' package
+\makeatletter
+\newcommand\appendix@chapter[1]{%
+  \refstepcounter{chapter}
+  \clearpage
+  \orig@chapter*{Приложение \@Alph\c@chapter. #1}
+  \addcontentsline{toc}{likechapter}{Приложение \@Alph\c@chapter. #1}
+}
+\let\orig@chapter\chapter
+\g@addto@macro\appendix{\let\chapter\appendix@chapter}
+\makeatother
